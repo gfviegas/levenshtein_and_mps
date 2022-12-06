@@ -1,13 +1,17 @@
-use std::ops::RangeInclusive;
 use rand::Rng;
+use std::ops::RangeInclusive;
 
-use super::binary_tree::{BinaryTree, BTNode, leaf_node};
+use super::binary_tree::{leaf_node, BTNode, BinaryTree};
 use crate::debug::is_debug;
 
-const LEAF_PROBABILITY: f32 = 0.01;
-const VALUE_RANGE: RangeInclusive<i32> = -100000..=450000;
+const LEAF_PROBABILITY: f32 = 0.21;
+const VALUE_RANGE: RangeInclusive<i32> = -5..=50;
 
-pub fn random_node(leaf_probability: f32, leaf_growth_rate: f32, taken_values: &mut Vec<i32>) -> BTNode<i32> {
+pub fn random_node(
+    leaf_probability: f32,
+    leaf_growth_rate: f32,
+    taken_values: &mut Vec<i32>,
+) -> BTNode<i32> {
     let mut rng = rand::thread_rng();
 
     let leaf_test: f32 = rand::random();
@@ -20,9 +24,12 @@ pub fn random_node(leaf_probability: f32, leaf_growth_rate: f32, taken_values: &
     taken_values.push(value);
 
     if is_debug() {
-        println!("Generator ~ LT: {}, LP: {}, V: {}", leaf_test, leaf_probability, value);
+        println!(
+            "Generator ~ LT: {}, LP: {}, V: {}",
+            leaf_test, leaf_probability, value
+        );
     }
-    
+
     if leaf_test < leaf_probability {
         return leaf_node(value);
     }
@@ -32,15 +39,17 @@ pub fn random_node(leaf_probability: f32, leaf_growth_rate: f32, taken_values: &
     return BTNode::new(
         value,
         random_node(next_leaf_prob, leaf_growth_rate, taken_values),
-        random_node(next_leaf_prob, leaf_growth_rate, taken_values)
+        random_node(next_leaf_prob, leaf_growth_rate, taken_values),
     );
 }
 
-
 pub fn generate_random_tree(leaf_growth_rate: f32) -> BinaryTree<i32> {
     let mut taken_values: Vec<i32> = Vec::new();
-    let tree = BinaryTree::new(random_node(LEAF_PROBABILITY, leaf_growth_rate, &mut taken_values));
+    let tree = BinaryTree::new(random_node(
+        LEAF_PROBABILITY,
+        leaf_growth_rate,
+        &mut taken_values,
+    ));
 
     return tree;
 }
-
