@@ -1,5 +1,5 @@
-***Documentação | Trabalho 3 | INF 610 - Estruturas de Dados e Algoritmos*** \
-> Implementação completa disponível no [Github](https://github.com/gfviegas/levenshtein_and_mss).
+***Documentação | Trabalho 3 | INF 610 - Estruturas de Dados e Algoritmos***
+> Implementação completa disponível no [Github](https://github.com/gfviegas/levenshtein_and_mps).
 Essa documentação visa atender os requisitos do trabalho prático nº 3 da disciplina INF610 do Programa de Pós-Graduação em Ciência da Computação da Universidade Federal de Viçosa.
 
 # Força Bruta x Programação Dinâmica
@@ -299,6 +299,8 @@ De maneira similar, o comportamento de divisão e conquista é claramente linear
     <img src="./resources/images/mps_dnc_1.png?x=1" width="300px" height="auto" />
     <img src="./resources/images/mps_dnc_2.png?x=1" width="300px" height="auto" />
 </center>
+
+Concluindo, a abordagem greedy possui uma ordem de crescimento muito mais baixa que a de divisão e conquista, e consegue calcular o resultado do problema para árvores que demorariam horas ou dias na outra abordagem, além da necessidade de mais recursos computacionais em memória para a pilha de chamadas. Apesar da abordagem não ser ótima e poder dar respostas ruins, para árvores grandes suficientes é uma abordagem válida tendo em vista a necessidade de uma resposta aproximada em tempo ágil.
 
 <br/><hr/><br/>
 
